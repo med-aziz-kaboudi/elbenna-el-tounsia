@@ -194,6 +194,20 @@ body {
 
 .cover-sub[lang="ar"] { font-family: var(--arabic); text-transform: none; letter-spacing: 0; font-size: clamp(16px, 3.4cqh, 5cqw); }
 
+.cover-ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: clamp(12px, 2.5cqh, 3.8cqw);
+  text-decoration: none;
+  border-bottom: 1.5px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+
+.cover-ig:hover, .cover-ig:focus-visible { color: var(--red); border-color: var(--red); }
+
 .cover-hint {
   display: inline-flex;
   align-items: center;
