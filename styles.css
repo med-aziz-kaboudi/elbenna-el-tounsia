@@ -233,11 +233,28 @@ body {
 .page.--right .page-inner.paper::before { left: 0; background: linear-gradient(270deg, transparent, #221c1422); }
 
 .paper-content {
+  position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 6.5cqh 8cqw;
   gap: 2.2cqh;
+}
+
+/* Tunisia-to-Italy accent stripe along the top of every paper page */
+.paper-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16%;
+  right: 16%;
+  height: 3.5px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg,
+    #E70013 0%, #E70013 28%,
+    var(--paper-deep) 46%, var(--paper-deep) 54%,
+    #009246 72%, #009246 100%);
+  opacity: .55;
 }
 
 .eyebrow {
@@ -264,11 +281,22 @@ body {
   position: absolute;
   bottom: 2.2cqh;
   left: 0; right: 0;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.6cqw;
   font-family: var(--serif);
   font-style: italic;
   color: var(--ink-soft);
   font-size: clamp(10px, 2cqh, 3cqw);
+}
+
+.page-num .flag-sm {
+  width: clamp(15px, 2.6cqh, 4.4cqw);
+  border-radius: 2.5px;
+  opacity: .9;
+  box-shadow: 0 1px 3px rgba(34, 28, 20, .22);
+  outline: 1px solid #221c141f;
 }
 
 /* welcome page */

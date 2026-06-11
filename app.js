@@ -121,6 +121,56 @@
   btnPrev.addEventListener("click", function () { flip.flipPrev(); });
   btnNext.addEventListener("click", function () { flip.flipNext(); });
 
+  // --- touch: take over from StPageFlip -------------------------------
+  // The library picks which page to fold from the *starting* finger
+  // position, so a slow leftward drag that begins on the left half flips
+  // BACKWARDS. We intercept touch in the capture phase (its handlers sit
+  // on a child element) and flip strictly by movement direction instead.
+  var touch = { x: 0, y: 0, live: false };
+
+  bookEl.addEventListener("touchstart", function (e) {
+    if (e.touches.length !== 1) return;
+    touch.x = e.touches[0].clientX;
+    touch.y = e.touches[0].clientY;
+    touch.live = true;
+    e.stopPropagation();
+  }, { capture: true, passive: true });
+
+  bookEl.addEventListener("touchmove", function (e) {
+    e.stopPropagation();
+  }, { capture: true, passive: true });
+
+  bookEl.addEventListener("touchend", function (e) {
+    if (!touch.live) return;
+    touch.live = false;
+    e.stopPropagation();
+    var t = e.changedTouches[0];
+    var dx = t.clientX - touch.x;
+    var dy = t.clientY - touch.y;
+    var onLink = e.target.closest && e.target.closest("a");
+
+    // tap: open links normally, otherwise flip by screen half
+    if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
+      if (onLink) return;
+      e.preventDefault();
+      var rect = bookEl.getBoundingClientRect();
+      if ((t.clientX - rect.left) / rect.width > 0.5) flip.flipNext();
+      else flip.flipPrev();
+      return;
+    }
+
+    // swipe: direction decides, never the start position
+    if (Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+      e.preventDefault();
+      if (dx < 0) flip.flipNext();
+      else flip.flipPrev();
+    }
+  }, { capture: true, passive: false });
+
+  bookEl.addEventListener("touchcancel", function () {
+    touch.live = false;
+  }, { capture: true, passive: true });
+
   document.addEventListener("keydown", function (e) {
     if (e.key === "ArrowLeft") { flip.flipPrev(); }
     if (e.key === "ArrowRight") { flip.flipNext(); }
