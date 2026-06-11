@@ -29,4 +29,4 @@ python3 -m http.server 8000
 
 I piatti: Pollo Mosle, Pesce al Forno, Couscous Carne, Pasta Pollo, Kamounia Kebda, Mermez Carne.
 Street food: Piatto/Panino Kafteji, Chapati Mahdia, Fricassè, Panino Merguez, Soufflé.
-Consegna gratuita da 3 ordini. ☎ 380 104 6885 · 351 186 6623 — Carate Brianza (MB).
+Consegna gratuita da 3 ordini. ☎ 380 104 6885 — Carate Brianza (MB).
