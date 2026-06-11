@@ -149,6 +149,31 @@ body {
   color: var(--ink);
 }
 
+.cover-flags {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+}
+
+.flag {
+  width: clamp(24px, 5.2cqh, 9cqw);
+  height: auto;
+  border-radius: 3.5px;
+  box-shadow: 0 2px 6px rgba(34, 28, 20, .28);
+  outline: 1px solid #221c1426;
+}
+
+.flag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  opacity: .55;
+}
+
+.tunis-band .tb-flags { display: flex; align-items: center; gap: 8px; }
+.tunis-band .flag { width: clamp(22px, 4.6cqh, 8cqw); }
+
 .cover-rule {
   display: flex;
   align-items: center;
